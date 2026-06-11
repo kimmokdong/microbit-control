@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/dapjs@2.3.0/bundles/dap.umd.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +20,9 @@
                 <h1>M:BIT CONTROL</h1>
             </div>
             <div class="controls-top">
+                <button id="btn-flash" class="flash-btn">
+                    <i class="fa-brands fa-usb"></i> <span>코드설치</span>
+                </button>
                 <button id="btn-connect" class="connect-btn">
                     <i class="fa-brands fa-bluetooth-b"></i> <span>Connect</span>
                 </button>
@@ -261,6 +265,23 @@
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">Settings Saved!</div>
+
+    <!-- USB Flash Modal -->
+    <div id="flash-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <div class="modal-header">
+                <h2><i class="fa-brands fa-usb"></i> 마이크로비트 코드 설치</h2>
+                <button id="btn-close-flash-modal" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="settings-desc">마이크로비트를 USB 케이블로 연결해주세요.<br>연결 후 설치가 시작됩니다.</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="flash-progress-bar"></div>
+                </div>
+                <p id="flash-status-text" style="margin-top: 15px; font-weight: 600; color: var(--mb-blue);">버튼을 눌러 기기를 선택하세요.</p>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>

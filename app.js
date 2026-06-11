@@ -352,3 +352,86 @@ async function sendData(data) {
 // Start app
 init();
 
+// ==========================================
+// WebUSB Firmware Flashing Logic (DAPjs)
+// ==========================================
+const btnFlash = document.getElementById('btn-flash');
+const flashModal = document.getElementById('flash-modal');
+const btnCloseFlashModal = document.getElementById('btn-close-flash-modal');
+const flashProgressBar = document.getElementById('flash-progress-bar');
+const flashStatusText = document.getElementById('flash-status-text');
+
+if (btnFlash) {
+    btnFlash.addEventListener('click', async () => {
+        flashModal.classList.add('show');
+        flashProgressBar.style.width = '0%';
+        flashStatusText.innerText = '팝업 창에서 마이크로비트를 선택하세요...';
+        flashStatusText.style.color = 'var(--mb-blue)';
+
+        try {
+            if (!navigator.usb) {
+                throw new Error("WebUSB를 지원하지 않는 브라우저입니다. Chrome을 사용해주세요.");
+            }
+
+            // 1. Request USB Device
+            const device = await navigator.usb.requestDevice({
+                filters: [{ vendorId: 0x0d28 }] // micro:bit vendor ID
+            });
+            
+            flashStatusText.innerText = '펌웨어 파일 읽는 중...';
+            
+            // 2. Fetch the hex file from the server
+            const response = await fetch('firmware.hex');
+            if (!response.ok) throw new Error("firmware.hex 파일을 찾을 수 없습니다.");
+            const hexData = await response.text();
+
+            flashStatusText.innerText = '기기 연결 중...';
+            
+            // 3. Connect via DAPjs
+            const transport = new DAPjs.WebUSB(device);
+            const target = new DAPjs.DAPLink(transport);
+
+            // Progress event
+            target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
+                const percent = Math.floor(progress * 100);
+                flashProgressBar.style.width = percent + '%';
+                flashStatusText.innerText = `설치 중... ${percent}%`;
+            });
+
+            await target.connect();
+            
+            flashStatusText.innerText = '설치 시작... (약 10초 소요)';
+            
+            // 4. Flash the firmware
+            await target.flash(hexData);
+            
+            // 5. Disconnect
+            await target.disconnect();
+            
+            flashProgressBar.style.width = '100%';
+            flashStatusText.innerText = '✅ 설치 완료! 블루투스 연결을 시도하세요.';
+            flashStatusText.style.color = 'var(--mb-green)';
+            
+            // Auto close after success
+            setTimeout(() => {
+                if (flashModal.classList.contains('show')) {
+                    flashModal.classList.remove('show');
+                }
+            }, 3000);
+            
+        } catch (error) {
+            console.error(error);
+            flashStatusText.innerText = `❌ 오류: ${error.message}`;
+            flashStatusText.style.color = 'var(--mb-red)';
+            
+            // If user didn't select a device, just close or keep showing error
+            if (error.message.includes('No device selected')) {
+                flashModal.classList.remove('show');
+            }
+        }
+    });
+
+    btnCloseFlashModal.addEventListener('click', () => {
+        flashModal.classList.remove('show');
+    });
+}

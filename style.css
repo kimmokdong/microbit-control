@@ -585,3 +585,41 @@ button {
         font-size: 1.4rem;
     }
 }
+
+/* Flash UI Styles */
+.flash-btn {
+    background: rgba(245, 184, 0, 0.1);
+    border: 1px solid var(--mb-yellow);
+    color: var(--mb-yellow);
+    padding: 0 20px;
+    height: 44px;
+    border-radius: 22px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: var(--glass-blur);
+    box-shadow: var(--glow-spread) rgba(245, 184, 0, 0.1);
+}
+
+.flash-btn:hover {
+    background: rgba(245, 184, 0, 0.2);
+    box-shadow: var(--glow-spread) rgba(245, 184, 0, 0.3);
+}
+
+.progress-container {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--mb-blue), var(--mb-green));
+    transition: width 0.3s ease;
+}
