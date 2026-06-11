@@ -359,9 +359,29 @@ const btnFlash = document.getElementById('btn-flash');
 const flashModal = document.getElementById('flash-modal');
 const btnCloseFlashModal = document.getElementById('btn-close-flash-modal');
 
+// Help Modal Logic
+const btnHelp = document.getElementById('btn-help');
+const helpModal = document.getElementById('help-modal');
+const btnCloseHelp = document.getElementById('btn-close-help');
+
+if (btnHelp) {
+    btnHelp.addEventListener('click', () => helpModal.classList.add('show'));
+    btnCloseHelp.addEventListener('click', () => helpModal.classList.remove('show'));
+    helpModal.addEventListener('click', (e) => {
+        if (e.target === helpModal) helpModal.classList.remove('show');
+    });
+}
+
 if (btnFlash) {
     btnFlash.addEventListener('click', async () => {
+        const originalHtml = btnFlash.innerHTML;
         try {
+            // 다운로드 시작 시 로딩 상태 표시
+            btnFlash.disabled = true;
+            btnFlash.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>파일 준비 중...</span>';
+            btnFlash.style.opacity = '0.7';
+            btnFlash.style.cursor = 'wait';
+
             // 펌웨어 파일 가져오기 (원본 펌웨어 파일 사용)
             const response = await fetch('firmware.hex');
             const blob = await response.blob();
@@ -403,6 +423,12 @@ if (btnFlash) {
                 console.error('Download failed:', error);
                 alert('파일 저장 중 문제가 발생했습니다.');
             }
+        } finally {
+            // 로딩 상태 복구
+            btnFlash.innerHTML = originalHtml;
+            btnFlash.disabled = false;
+            btnFlash.style.opacity = '1';
+            btnFlash.style.cursor = 'pointer';
         }
     });
 

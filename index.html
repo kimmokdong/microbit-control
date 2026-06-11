@@ -19,6 +19,9 @@
                 <h1>M:BIT CONTROL</h1>
             </div>
             <div class="controls-top">
+                <button id="btn-help" class="icon-btn help-btn" style="color: var(--text-light); font-size: 1.2rem; margin-right: 10px; background: transparent; border: none; cursor: pointer; padding: 5px;" aria-label="도움말">
+                    <i class="fa-regular fa-circle-question"></i>
+                </button>
                 <button id="btn-flash" class="flash-btn">
                     <i class="fa-brands fa-usb"></i> <span>코드설치</span>
                 </button>
@@ -288,6 +291,31 @@
                 <p style="font-size: 0.9rem; color: var(--text-muted);">
                     <i class="fa-solid fa-circle-info"></i> 파일 복사가 완료되면 마이크로비트 뒷면의 노란 불빛이 깜빡이다가 멈추고 재부팅됩니다.
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: center;">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-truck-medical"></i> 연결 문제 해결 (도움말)</h2>
+                <button id="btn-close-help" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="text-align: left; line-height: 1.6;">
+                <h3 style="color: var(--mb-green); margin-bottom: 10px;"><i class="fa-solid fa-triangle-exclamation"></i> 블루투스 연결이 계속 튕기거나 실패하나요?</h3>
+                <p>마이크로비트를 초기화했거나 다른 코드를 넣었다면, <b>윈도우의 '블루투스 캐시(기억)'가 꼬였을 확률이 99%</b>입니다.</p>
+                
+                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1);">
+                    <ol style="margin-left: 20px; color: var(--text-light);">
+                        <li style="margin-bottom: 8px;">윈도우 우측 하단 <b>[블루투스 및 기타 장치 설정]</b> 열기</li>
+                        <li style="margin-bottom: 8px;">목록에서 기존 <b>BBC micro:bit</b> 클릭 후 <b>[장치 제거]</b> 클릭</li>
+                        <li style="margin-bottom: 8px;">노트북의 <b>블루투스를 완전히 껐다가 3초 뒤 다시 켜기</b></li>
+                        <li>조종기 창을 <b>새로고침(F5)</b>하고 다시 Connect 시도!</li>
+                    </ol>
+                </div>
+                
+                <p style="font-size: 0.9rem; color: var(--text-muted);"><i class="fa-solid fa-circle-info"></i> 그래도 안 된다면 원본 MakeCode 프로젝트 설정에서 <b>'No Pairing Required'</b>가 켜져 있는지, 코드 안에 <b>'블루투스 UART 서비스'</b> 시작 블록이 있는지 확인해 주세요.</p>
             </div>
         </div>
     </div>
