@@ -360,17 +360,50 @@ const flashModal = document.getElementById('flash-modal');
 const btnCloseFlashModal = document.getElementById('btn-close-flash-modal');
 
 if (btnFlash) {
-    btnFlash.addEventListener('click', () => {
-        // 1. 자동 다운로드 트리거
-        const link = document.createElement('a');
-        link.href = 'firmware.hex';
-        link.download = 'microbit_controller.hex';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // 2. 가이드 팝업 띄우기
-        flashModal.classList.add('show');
+    btnFlash.addEventListener('click', async () => {
+        try {
+            // 펌웨어 파일 가져오기 (원본 펌웨어 파일 사용)
+            const response = await fetch('firmware.hex');
+            const blob = await response.blob();
+
+            if (window.showSaveFilePicker) {
+                // 모던 브라우저 (Chrome, Edge 등): '다른 이름으로 저장' 창 띄우기
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: 'microbit_controller.hex',
+                    types: [{
+                        description: 'Micro:bit Hex File',
+                        accept: { 'application/octet-stream': ['.hex'] },
+                    }],
+                });
+                
+                // 사용자가 선택한 경로(MICROBIT 드라이브)에 직접 파일 쓰기
+                const writable = await handle.createWritable();
+                await writable.write(blob);
+                await writable.close();
+                
+                alert('🎉 마이크로비트에 성공적으로 파일이 복사되었습니다!\n마이크로비트 뒷면의 노란 불빛 깜빡임이 멈추면 연결을 진행해주세요.');
+                
+            } else {
+                // 구형 브라우저(Safari 등) fallback: 기존 다운로드 방식
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'microbit_controller.hex';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                // 직접 복사하라는 가이드 팝업 띄우기
+                flashModal.classList.add('show');
+            }
+        } catch (error) {
+            // 사용자가 저장 창에서 '취소'를 누른 경우는 에러로 처리하지 않음
+            if (error.name !== 'AbortError') {
+                console.error('Download failed:', error);
+                alert('파일 저장 중 문제가 발생했습니다.');
+            }
+        }
     });
 
     btnCloseFlashModal.addEventListener('click', () => {
