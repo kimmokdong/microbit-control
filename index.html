@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -10,13 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-container">
         <!-- Header -->
         <header>
             <div class="logo">
                 <i class="fa-solid fa-microchip"></i>
-                <h1>M:BIT CONTROL <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted); margin-left: 8px; vertical-align: middle;">만든이 현승쌤</span></h1>
+                <h1>M:BIT CONTROL <span
+                        style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted); margin-left: 8px; vertical-align: middle;">만든이
+                        김현승쌤</span></h1>
             </div>
             <div class="controls-top">
                 <button id="btn-manual" class="manual-btn">
@@ -97,7 +101,8 @@
 
     <!-- Real-time Tuning Modal -->
     <div class="modal" id="tuning-modal">
-        <div class="tuning-panel" style="margin: 0; max-width: 650px; width: 95%; background: var(--bg-color); max-height: 90vh; display: flex; flex-direction: column;">
+        <div class="tuning-panel"
+            style="margin: 0; max-width: 650px; width: 95%; background: var(--bg-color); max-height: 90vh; display: flex; flex-direction: column;">
             <div class="tuning-header" style="flex-shrink: 0;">
                 <h3><i class="fa-solid fa-sliders"></i> Motor Tuning</h3>
                 <button class="close-btn" id="btn-close-tuning"><i class="fa-solid fa-xmark"></i></button>
@@ -109,7 +114,8 @@
                         <label>직진 시 P0 (왼쪽)</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">뒤로</span>
-                            <input type="range" class="motor-slider" id="var_f_p0" data-var="F_P0" min="0" max="180" value="180">
+                            <input type="range" class="motor-slider" id="var_f_p0" data-var="F_P0" min="0" max="180"
+                                value="180">
                             <span class="dir-label">앞으로</span>
                             <span class="slider-val" id="val_f_p0">180</span>
                         </div>
@@ -118,7 +124,8 @@
                         <label>직진 시 P1 (오른쪽)</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">앞으로</span>
-                            <input type="range" class="motor-slider" id="var_f_p1" data-var="F_P1" min="0" max="180" value="0">
+                            <input type="range" class="motor-slider" id="var_f_p1" data-var="F_P1" min="0" max="180"
+                                value="0">
                             <span class="dir-label">뒤로</span>
                             <span class="slider-val" id="val_f_p1">0</span>
                         </div>
@@ -127,7 +134,8 @@
                         <label>후진 시 P0</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">뒤로</span>
-                            <input type="range" class="motor-slider" id="var_b_p0" data-var="B_P0" min="0" max="180" value="0">
+                            <input type="range" class="motor-slider" id="var_b_p0" data-var="B_P0" min="0" max="180"
+                                value="0">
                             <span class="dir-label">앞으로</span>
                             <span class="slider-val" id="val_b_p0">0</span>
                         </div>
@@ -136,7 +144,8 @@
                         <label>후진 시 P1</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">앞으로</span>
-                            <input type="range" class="motor-slider" id="var_b_p1" data-var="B_P1" min="0" max="180" value="180">
+                            <input type="range" class="motor-slider" id="var_b_p1" data-var="B_P1" min="0" max="180"
+                                value="180">
                             <span class="dir-label">뒤로</span>
                             <span class="slider-val" id="val_b_p1">180</span>
                         </div>
@@ -145,7 +154,8 @@
                         <label>좌회전 시 P0</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">뒤로</span>
-                            <input type="range" class="motor-slider" id="var_l_p0" data-var="L_P0" min="0" max="180" value="0">
+                            <input type="range" class="motor-slider" id="var_l_p0" data-var="L_P0" min="0" max="180"
+                                value="0">
                             <span class="dir-label">앞으로</span>
                             <span class="slider-val" id="val_l_p0">0</span>
                         </div>
@@ -154,7 +164,8 @@
                         <label>좌회전 시 P1</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">앞으로</span>
-                            <input type="range" class="motor-slider" id="var_l_p1" data-var="L_P1" min="0" max="180" value="0">
+                            <input type="range" class="motor-slider" id="var_l_p1" data-var="L_P1" min="0" max="180"
+                                value="0">
                             <span class="dir-label">뒤로</span>
                             <span class="slider-val" id="val_l_p1">0</span>
                         </div>
@@ -163,7 +174,8 @@
                         <label>우회전 시 P0</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">뒤로</span>
-                            <input type="range" class="motor-slider" id="var_r_p0" data-var="R_P0" min="0" max="180" value="180">
+                            <input type="range" class="motor-slider" id="var_r_p0" data-var="R_P0" min="0" max="180"
+                                value="180">
                             <span class="dir-label">앞으로</span>
                             <span class="slider-val" id="val_r_p0">180</span>
                         </div>
@@ -172,7 +184,8 @@
                         <label>우회전 시 P1</label>
                         <div class="slider-wrapper">
                             <span class="dir-label">앞으로</span>
-                            <input type="range" class="motor-slider" id="var_r_p1" data-var="R_P1" min="0" max="180" value="180">
+                            <input type="range" class="motor-slider" id="var_r_p1" data-var="R_P1" min="0" max="180"
+                                value="180">
                             <span class="dir-label">뒤로</span>
                             <span class="slider-val" id="val_r_p1">180</span>
                         </div>
@@ -181,28 +194,32 @@
                     <div class="slider-group" style="margin-top: 10px;">
                         <label>A 버튼 (P2 모터)</label>
                         <div class="slider-wrapper">
-                            <input type="range" class="motor-slider" id="var_a_p2" data-var="A_P2" min="0" max="180" value="180">
+                            <input type="range" class="motor-slider" id="var_a_p2" data-var="A_P2" min="0" max="180"
+                                value="180">
                             <span class="slider-val" id="val_a_p2">180</span>
                         </div>
                     </div>
                     <div class="slider-group" style="margin-top: 10px;">
                         <label>B 버튼 (P2 모터)</label>
                         <div class="slider-wrapper">
-                            <input type="range" class="motor-slider" id="var_b_p2" data-var="B_P2" min="0" max="180" value="0">
+                            <input type="range" class="motor-slider" id="var_b_p2" data-var="B_P2" min="0" max="180"
+                                value="0">
                             <span class="slider-val" id="val_b_p2">0</span>
                         </div>
                     </div>
                     <div class="slider-group">
                         <label>C 버튼 (P2 모터)</label>
                         <div class="slider-wrapper">
-                            <input type="range" class="motor-slider" id="var_c_p2" data-var="C_P2" min="0" max="180" value="90">
+                            <input type="range" class="motor-slider" id="var_c_p2" data-var="C_P2" min="0" max="180"
+                                value="90">
                             <span class="slider-val" id="val_c_p2">90</span>
                         </div>
                     </div>
                     <div class="slider-group">
                         <label>D 버튼 (P2 모터)</label>
                         <div class="slider-wrapper">
-                            <input type="range" class="motor-slider" id="var_d_p2" data-var="D_P2" min="0" max="180" value="90">
+                            <input type="range" class="motor-slider" id="var_d_p2" data-var="D_P2" min="0" max="180"
+                                value="90">
                             <span class="slider-val" id="val_d_p2">90</span>
                         </div>
                     </div>
@@ -220,7 +237,7 @@
             </div>
             <div class="modal-body">
                 <p class="settings-desc">버튼을 눌렀을 때 마이크로비트로 전송될 문자(명령)를 설정하세요.</p>
-                
+
                 <div class="settings-grid">
                     <div class="input-group">
                         <label for="cmd-up"><i class="fa-solid fa-arrow-up"></i> 직진 (Up)</label>
@@ -259,7 +276,7 @@
                         <input type="text" id="cmd-stop" maxlength="5">
                     </div>
                 </div>
-                
+
                 <button id="btn-save-settings" class="primary-btn">Save Settings</button>
             </div>
         </div>
@@ -279,15 +296,16 @@
                 <p style="font-size: 1.1rem; color: var(--mb-green); font-weight: 800; margin-bottom: 15px;">
                     파일이 성공적으로 다운로드되었습니다! 🎉
                 </p>
-                
-                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; text-align: left; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
+
+                <div
+                    style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; text-align: left; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
                     <ol style="margin-left: 20px; color: var(--text-light);">
                         <li style="margin-bottom: 10px;">마이크로비트를 컴퓨터에 <b>USB 케이블</b>로 연결합니다.</li>
                         <li style="margin-bottom: 10px;">방금 다운로드된 <b>.hex 파일</b>을 복사하거나 드래그합니다.</li>
                         <li>내 PC(내 컴퓨터)에 나타난 <b>MICROBIT 드라이브</b> 안으로 쏙! 붙여넣기 하세요.</li>
                     </ol>
                 </div>
-                
+
                 <p style="font-size: 0.9rem; color: var(--text-muted);">
                     <i class="fa-solid fa-circle-info"></i> 파일 복사가 완료되면 마이크로비트 뒷면의 노란 불빛이 깜빡이다가 멈추고 재부팅됩니다.
                 </p>
@@ -302,7 +320,8 @@
                 <h2><i class="fa-solid fa-book"></i> 사용 설명서</h2>
                 <button id="btn-close-manual" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body markdown-body" id="manual-content" style="text-align: left; line-height: 1.6; max-height: 70vh; overflow-y: auto; padding-right: 10px; color: var(--text-light);">
+            <div class="modal-body markdown-body" id="manual-content"
+                style="text-align: left; line-height: 1.6; max-height: 70vh; overflow-y: auto; padding-right: 10px; color: var(--text-light);">
                 <p><i class="fa-solid fa-spinner fa-spin"></i> 설명서를 불러오는 중입니다...</p>
             </div>
         </div>
@@ -312,4 +331,5 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
