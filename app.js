@@ -353,91 +353,27 @@ async function sendData(data) {
 init();
 
 // ==========================================
-// WebUSB Firmware Flashing Logic (DAPjs)
+// Firmware Download & Guide Logic
 // ==========================================
 const btnFlash = document.getElementById('btn-flash');
 const flashModal = document.getElementById('flash-modal');
 const btnCloseFlashModal = document.getElementById('btn-close-flash-modal');
-const flashProgressBar = document.getElementById('flash-progress-bar');
-const flashStatusText = document.getElementById('flash-status-text');
 
 if (btnFlash) {
-    btnFlash.addEventListener('click', async () => {
+    btnFlash.addEventListener('click', () => {
+        // 1. 자동 다운로드 트리거
+        const link = document.createElement('a');
+        link.href = 'firmware.hex';
+        link.download = 'microbit_controller.hex';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // 2. 가이드 팝업 띄우기
         flashModal.classList.add('show');
-        if(flashProgressBar) flashProgressBar.style.width = '0%';
-        if(flashStatusText) {
-            flashStatusText.innerText = '팝업 창에서 마이크로비트를 선택하세요...';
-            flashStatusText.style.color = 'var(--mb-blue)';
-        }
-
-        try {
-            if (!navigator.usb) {
-                throw new Error("WebUSB를 지원하지 않는 브라우저입니다. Chrome을 사용해주세요.");
-            }
-
-            // 1. Request USB Device
-            const device = await navigator.usb.requestDevice({
-                filters: [{ vendorId: 0x0d28 }] // micro:bit vendor ID
-            });
-            
-            if(flashStatusText) flashStatusText.innerText = '펌웨어 파일 읽는 중...';
-            
-            // 2. Fetch the hex file from the server
-            const response = await fetch('firmware.hex');
-            if (!response.ok) throw new Error("firmware.hex 파일을 찾을 수 없습니다.");
-            
-            // HEX 파일은 반드시 텍스트로 읽어야 파서가 인식하며, 끝에 쓸데없는 줄바꿈이 있으면 에러가 날 수 있으므로 trim() 적용
-            let hexData = await response.text();
-            hexData = hexData.trim();
-
-            if(flashStatusText) flashStatusText.innerText = '기기 연결 중...';
-            
-            // 3. Connect via DAPjs
-            const transport = new DAPjs.WebUSB(device);
-            const target = new DAPjs.DAPLink(transport);
-
-            // Progress event
-            target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
-                const percent = Math.floor(progress * 100);
-                if(flashProgressBar) flashProgressBar.style.width = percent + '%';
-                if(flashStatusText) flashStatusText.innerText = `설치 중... ${percent}%`;
-            });
-
-            await target.connect();
-            
-            if(flashStatusText) flashStatusText.innerText = '설치 시작... (약 10~20초 소요)';
-            
-            // 4. Flash the firmware
-            await target.flash(hexData);
-            
-            // 5. Disconnect
-            await target.disconnect();
-            
-            if(flashProgressBar) flashProgressBar.style.width = '100%';
-            if(flashStatusText) {
-                flashStatusText.innerText = '✅ 설치 완료! 블루투스 연결을 시도하세요.';
-                flashStatusText.style.color = 'var(--mb-green)';
-            }
-            
-            // Auto close after success
-            setTimeout(() => {
-                if (flashModal.classList.contains('show')) {
-                    flashModal.classList.remove('show');
-                }
-            }, 3000);
-            
-        } catch (error) {
-            console.error(error);
-            if(flashStatusText) {
-                flashStatusText.innerText = `❌ 오류: ${error.message}`;
-                flashStatusText.style.color = 'var(--mb-red)';
-            }
-        }
     });
 
-    if(btnCloseFlashModal) {
-        btnCloseFlashModal.addEventListener('click', () => {
-            flashModal.classList.remove('show');
-        });
-    }
+    btnCloseFlashModal.addEventListener('click', () => {
+        flashModal.classList.remove('show');
+    });
 }
