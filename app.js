@@ -383,7 +383,8 @@ if (btnFlash) {
             // 2. Fetch the hex file from the server
             const response = await fetch('firmware.hex');
             if (!response.ok) throw new Error("firmware.hex 파일을 찾을 수 없습니다.");
-            const hexData = await response.text();
+            const buffer = await response.arrayBuffer();
+            const hexData = new Uint8Array(buffer);
 
             flashStatusText.innerText = '기기 연결 중...';
             
