@@ -359,16 +359,30 @@ const btnFlash = document.getElementById('btn-flash');
 const flashModal = document.getElementById('flash-modal');
 const btnCloseFlashModal = document.getElementById('btn-close-flash-modal');
 
-// Help Modal Logic
-const btnHelp = document.getElementById('btn-help');
-const helpModal = document.getElementById('help-modal');
-const btnCloseHelp = document.getElementById('btn-close-help');
+// Manual Modal Logic
+const btnManual = document.getElementById('btn-manual');
+const manualModal = document.getElementById('manual-modal');
+const btnCloseManual = document.getElementById('btn-close-manual');
+const manualContent = document.getElementById('manual-content');
 
-if (btnHelp) {
-    btnHelp.addEventListener('click', () => helpModal.classList.add('show'));
-    btnCloseHelp.addEventListener('click', () => helpModal.classList.remove('show'));
-    helpModal.addEventListener('click', (e) => {
-        if (e.target === helpModal) helpModal.classList.remove('show');
+if (btnManual) {
+    btnManual.addEventListener('click', async () => {
+        manualModal.classList.add('show');
+        try {
+            const response = await fetch('README.md');
+            if (response.ok) {
+                const text = await response.text();
+                manualContent.innerHTML = marked.parse(text);
+            } else {
+                manualContent.innerHTML = '<p>설명서를 불러오지 못했습니다.</p>';
+            }
+        } catch (error) {
+            manualContent.innerHTML = '<p>설명서를 불러오는 중 오류가 발생했습니다.</p>';
+        }
+    });
+    btnCloseManual.addEventListener('click', () => manualModal.classList.remove('show'));
+    manualModal.addEventListener('click', (e) => {
+        if (e.target === manualModal) manualModal.classList.remove('show');
     });
 }
 

@@ -19,8 +19,8 @@
                 <h1>M:BIT CONTROL <span style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted); margin-left: 8px; vertical-align: middle;">만든이 현승쌤</span></h1>
             </div>
             <div class="controls-top">
-                <button id="btn-help" class="icon-btn help-btn" style="color: var(--text-light); font-size: 1.2rem; margin-right: 10px; background: transparent; border: none; cursor: pointer; padding: 5px;" aria-label="도움말">
-                    <i class="fa-regular fa-circle-question"></i>
+                <button id="btn-manual" class="manual-btn">
+                    <i class="fa-solid fa-book"></i> <span>설명서</span>
                 </button>
                 <button id="btn-flash" class="flash-btn">
                     <i class="fa-brands fa-usb"></i> <span>코드설치</span>
@@ -295,31 +295,21 @@
         </div>
     </div>
 
-    <!-- Help Modal -->
-    <div id="help-modal" class="modal">
-        <div class="modal-content" style="max-width: 500px; text-align: center;">
+    <!-- Manual Modal -->
+    <div id="manual-modal" class="modal">
+        <div class="modal-content" style="max-width: 800px; text-align: center;">
             <div class="modal-header">
-                <h2><i class="fa-solid fa-truck-medical"></i> 연결 문제 해결 (도움말)</h2>
-                <button id="btn-close-help" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                <h2><i class="fa-solid fa-book"></i> 사용 설명서</h2>
+                <button id="btn-close-manual" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body" style="text-align: left; line-height: 1.6;">
-                <h3 style="color: var(--mb-green); margin-bottom: 10px;"><i class="fa-solid fa-triangle-exclamation"></i> 블루투스 연결이 계속 튕기거나 실패하나요?</h3>
-                <p>마이크로비트를 초기화했거나 다른 코드를 넣었다면, <b>윈도우의 '블루투스 캐시(기억)'가 꼬였을 확률이 99%</b>입니다.</p>
-                
-                <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1);">
-                    <ol style="margin-left: 20px; color: var(--text-light);">
-                        <li style="margin-bottom: 8px;">윈도우 우측 하단 <b>[블루투스 및 기타 장치 설정]</b> 열기</li>
-                        <li style="margin-bottom: 8px;">목록에서 기존 <b>BBC micro:bit</b> 클릭 후 <b>[장치 제거]</b> 클릭</li>
-                        <li style="margin-bottom: 8px;">노트북의 <b>블루투스를 완전히 껐다가 3초 뒤 다시 켜기</b></li>
-                        <li>조종기 창을 <b>새로고침(F5)</b>하고 다시 Connect 시도!</li>
-                    </ol>
-                </div>
-                
-                <p style="font-size: 0.9rem; color: var(--text-muted);"><i class="fa-solid fa-circle-info"></i> 그래도 안 된다면 원본 MakeCode 프로젝트 설정에서 <b>'No Pairing Required'</b>가 켜져 있는지, 코드 안에 <b>'블루투스 UART 서비스'</b> 시작 블록이 있는지 확인해 주세요.</p>
+            <div class="modal-body markdown-body" id="manual-content" style="text-align: left; line-height: 1.6; max-height: 70vh; overflow-y: auto; padding-right: 10px; color: var(--text-light);">
+                <p><i class="fa-solid fa-spinner fa-spin"></i> 설명서를 불러오는 중입니다...</p>
             </div>
         </div>
     </div>
 
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
